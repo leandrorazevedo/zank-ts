@@ -6,19 +6,19 @@ import React from 'react';
 import Sistema from './pages/sistemas';
 
 const useStyles = makeStyles({
-  app: {
-    height: '100vh',
-    width: '100%',
-  }
-})
+    app: {
+        height: '100vh',
+        width: '100%',
+    },
+});
 
 function App() {
-  const classes = useStyles();
-  return (
-    <div className={classes.app}>
-      <Sistema></Sistema>
-    </div>
-  );
+    const classes = useStyles();
+    return (
+        <div className={classes.app}>
+            <Sistema />
+        </div>
+    );
 }
 
 export default App;
