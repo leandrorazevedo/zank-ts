@@ -8,7 +8,7 @@ import helper, { ISistemasFormData } from './helper';
 
 const Sistema = () => {
     const classes = helper.useStyles();
-    const { register, handleSubmit, reset, errors } = useForm<ISistemasFormData>({
+    const { register, handleSubmit, reset, errors, formState } = useForm<ISistemasFormData>({
         defaultValues: helper.defaultValues,
         resolver: yupResolver(helper.schema),
     });
@@ -17,6 +17,9 @@ const Sistema = () => {
     const submitForm = handleSubmit(async (data, event) => {
         event?.preventDefault();
         console.log(data);
+
+        // simulando uma "demora" na resposta do backend
+        await new Promise(resolve => setTimeout(resolve, 5000));
 
         await axios.post('http://localhost:8080/sistemas', data);
 
@@ -44,7 +47,14 @@ const Sistema = () => {
                         label='Sistema Ativo ?'
                         control={<Switch name='ativo' inputRef={register} defaultChecked />}
                     />
-                    <Button type='submit' className={classes.button} color='primary' variant='contained' fullWidth >
+                    <Button
+                        type='submit'
+                        className={classes.button}
+                        color='primary'
+                        variant='contained'
+                        fullWidth
+                        disabled={formState.isSubmitting}
+                    >
                         salvar
                     </Button>
                 </form>
